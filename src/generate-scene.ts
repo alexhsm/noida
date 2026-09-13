@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import fs from 'node:fs';
 import path from 'node:path';
 import { loadManifest, sourceAssetPath } from './manifest.js';
 import {
@@ -13,6 +14,14 @@ import {
 
 const sceneId = process.argv[2] ?? '01';
 const model = process.env.RUNWAY_MODEL ?? 'gen4_turbo';
+const productionTrack = 'story-v2';
+
+function slug(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 async function main(): Promise<void> {
   requireRunwayKey();
@@ -31,6 +40,7 @@ async function main(): Promise<void> {
   const credits = estimatedCredits(model, outputSeconds);
 
   console.log(`\n${manifest.project.title}`);
+  console.log(`Production track: ${productionTrack}`);
   console.log(`Scene ${scene.id}: ${scene.name}`);
   console.log(`Input: ${filename}`);
   console.log(`Model: ${model}`);
@@ -58,15 +68,40 @@ async function main(): Promise<void> {
     const outputUrl = task.output?.[0];
     if (!outputUrl) throw new Error('Runway completed the task but returned no output URL.');
 
-    const outputName = `scene-${scene.id}-${model.replace(/[^a-zA-Z0-9._-]/g, '_')}-draft.mp4`;
-    const outputPath = path.resolve(process.cwd(), 'outputs', 'clips', outputName);
+    const outputDir = path.resolve(process.cwd(), 'outputs', productionTrack, 'clips');
+    fs.mkdirSync(outputDir, { recursive: true });
+    const safeModel = model.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const outputName = `scene-${scene.id}-${slug(scene.name)}-${safeModel}-draft.mp4`;
+    const outputPath = path.join(outputDir, outputName);
 
     console.log('3/3 Downloading output...');
     await downloadOutput(outputUrl, outputPath);
 
+    const sidecarPath = outputPath.replace(/\.mp4$/i, '.json');
+    fs.writeFileSync(
+      sidecarPath,
+      JSON.stringify(
+        {
+          productionTrack,
+          generatedAt: new Date().toISOString(),
+          sceneId: scene.id,
+          sceneName: scene.name,
+          input: filename,
+          model,
+          editDurationSeconds: scene.duration,
+          generationDurationSeconds: outputSeconds,
+          runwayTaskId: task.id,
+          outputFile: path.relative(process.cwd(), outputPath).replaceAll('\\', '/'),
+        },
+        null,
+        2,
+      ),
+    );
+
     console.log('');
     console.log('GENERATION PASS');
     console.log(`Saved: ${outputPath}`);
+    console.log(`Metadata: ${sidecarPath}`);
     console.log(`Runway task: ${task.id}`);
     console.log('');
   } catch (error) {
