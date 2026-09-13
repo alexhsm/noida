@@ -1,0 +1,28 @@
+{
+  "version": "edit-v1-picture-lock",
+  "title": "Ninth Atlas Residences — Story V2 Picture Lock",
+  "transitionSeconds": 0.35,
+  "output": "outputs/story-v2/final/ninth-atlas-residences-picture-lock-v1.mp4",
+  "scenes": [
+    { "id": "00", "start": 0.35, "duration": 8.0 },
+    { "id": "01", "start": 0.35, "duration": 8.0 },
+    {
+      "id": "02",
+      "start": 0.25,
+      "duration": 8.0,
+      "preferredPaths": [
+        "outputs/story-v2/selected/scene-02-arrival-dropoff-APPROVED.mp4",
+        "outputs/clips/scene-02-gen4_turbo-draft.mp4"
+      ]
+    },
+    { "id": "03", "start": 0.35, "duration": 8.0 },
+    { "id": "04", "start": 0.35, "duration": 8.0 },
+    { "id": "05", "start": 0.50, "duration": 7.0 },
+    { "id": "06", "start": 0.35, "duration": 9.0 },
+    { "id": "07", "start": 0.35, "duration": 8.0 },
+    { "id": "08", "start": 0.35, "duration": 8.0 },
+    { "id": "09", "start": 0.35, "duration": 9.0 },
+    { "id": "10", "start": 0.35, "duration": 9.0 },
+    { "id": "11", "start": 0.35, "duration": 9.0 }
+  ]
+}
