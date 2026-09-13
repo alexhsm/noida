@@ -1,0 +1,20 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Third-party/reference imagery stays local by default.
+assets/source/*
+!assets/source/.gitkeep
+assets/prepared/*
+!assets/prepared/.gitkeep
+
+# Generated media is local and reproducible.
+outputs/*
+!outputs/.gitkeep
+
+# Runtime metadata / temporary files
+.runtime/
+*.log
+.DS_Store
+Thumbs.db
