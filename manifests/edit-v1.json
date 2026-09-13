@@ -6,23 +6,8 @@
   "scenes": [
     { "id": "00", "start": 0.35, "duration": 8.0 },
     { "id": "01", "start": 0.35, "duration": 8.0 },
-    {
-      "id": "02",
-      "start": 0.25,
-      "duration": 8.0,
-      "preferredPaths": [
-        "outputs/story-v2/selected/scene-02-arrival-dropoff-APPROVED.mp4",
-        "outputs/clips/scene-02-gen4_turbo-draft.mp4"
-      ]
-    },
-    {
-      "id": "03",
-      "start": 0.35,
-      "duration": 8.0,
-      "preferredPaths": [
-        "outputs/clips/scene-03-gen4_turbo-draft.mp4"
-      ]
-    },
+    { "id": "02", "start": 0.25, "duration": 8.0 },
+    { "id": "03", "start": 0.35, "duration": 8.0 },
     { "id": "04", "start": 0.35, "duration": 8.0 },
     { "id": "05", "start": 0.50, "duration": 7.0 },
     { "id": "06", "start": 0.35, "duration": 9.0 },
