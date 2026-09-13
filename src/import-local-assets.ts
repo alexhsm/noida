@@ -63,7 +63,7 @@ const expected = [
     id: i + 1,
     destination: path.join(conceptDir, `concept-${String(i + 1).padStart(2, '0')}.png`),
   })),
-  ...Array.from({ length: 15 }, (_, i) => ({
+  ...Array.from({ length: 17 }, (_, i) => ({
     sourceBase: `ac${i + 1}`,
     kind: 'actual' as const,
     id: i + 1,
@@ -125,7 +125,7 @@ fs.writeFileSync(reportPath, JSON.stringify(output, null, 2));
 
 console.log('');
 console.log(`Concept files imported: ${output.counts.concepts}/10`);
-console.log(`Actual frames imported: ${output.counts.actual}/15`);
+console.log(`Actual frames imported: ${output.counts.actual}/17`);
 console.log(`Import report: ${reportPath}`);
 
 if (missing.length) {
@@ -133,4 +133,4 @@ if (missing.length) {
   process.exit(2);
 }
 
-console.log('IMPORT PASS. All 25 source images are now normalized inside the local repo asset vault.');
+console.log('IMPORT PASS. All 27 source images are now normalized inside the local repo asset vault.');
