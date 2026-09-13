@@ -1,124 +1,122 @@
 {
   "project": {
-    "id": "ninth-atlas-residences",
+    "id": "ninth-atlas-residences-story-v2",
     "title": "Ninth Atlas Residences",
-    "subtitle": "A cinematic residential walkthrough concept",
+    "subtitle": "A story-led cinematic residential walkthrough",
     "ratio": "1280:720",
-    "defaultModel": "gen4.5",
-    "targetRuntimeSeconds": 115,
-    "styleLock": "Photorealistic premium architectural film. Elegant luxury residential advertising, physically plausible camera motion, restrained human presence, natural materials, cinematic depth, believable scale, continuity across all shots. No warping, morphing, fantasy architecture, sudden geometry changes, random signage, text generation, or unrelated skyline substitutions."
+    "defaultModel": "gen4_turbo",
+    "targetRuntimeSeconds": 108,
+    "styleLock": "Photorealistic premium architectural film experienced as one continuous prospective-buyer visit. Preserve the supplied architecture, furniture, materials, lighting language and spatial scale. Camera motion must be slow, stabilized and physically plausible. Maintain warm refined luxury, believable human activity and continuity of time-of-day. No warping, morphing, fantasy architecture, sudden geometry changes, furniture mutation, random signage, new text, unrelated skyline substitutions, aggressive camera moves or surreal transitions."
   },
   "assets": {
-    "masterplan": "01_masterplan_aerial.jpg",
-    "tower": "02_tower_hero.jpg",
-    "garden": "03_tower_canyon_garden.jpg",
-    "arrival": "04_arrival_podium.jpg",
-    "pool": "05_poolside_clubhouse.jpg",
-    "lobby": "06_double_height_lobby.jpg",
-    "common": "07_lift_lobby_common_area.jpg",
-    "living": "08_living_room.jpg",
-    "dining": "09_dining_room.jpg",
-    "kitchen": "10_kitchen.jpg",
-    "bedroom": "11_master_bedroom.jpg",
-    "floorplan2d": "reference_floorplan_2d.png",
-    "floorplan3d": "reference_floorplan_3d.png"
+    "aerial": "actual/ac-01.png",
+    "approach": "actual/ac-02.png",
+    "arrival": "actual/ac-09.png",
+    "podium": "actual/ac-16.png",
+    "lobby": "actual/ac-03.png",
+    "corridor": "actual/ac-17.png",
+    "foyerLiving": "actual/ac-11.png",
+    "livingDining": "actual/ac-12.png",
+    "diningKitchen": "actual/ac-13.png",
+    "bedroom": "actual/ac-14.png",
+    "balcony": "actual/ac-15.png"
   },
   "scenes": [
     {
-      "id": "01",
-      "name": "Masterplan Arrival",
-      "asset": "masterplan",
+      "id": "00",
+      "name": "Aerial Project Establish",
+      "asset": "aerial",
       "duration": 8,
       "hero": true,
-      "prompt": "Cinematic aerial establishing shot of the same premium residential development shown in the reference. Begin high and wide, then glide slowly forward and slightly downward toward the central landscaped heart of the property. Preserve tower placement, road geometry, landscape structure and architectural character. Golden-hour sunlight, long soft shadows, subtle atmospheric haze, restrained traffic and tiny natural human activity. Expensive real-estate campaign cinematography, smooth drone inertia, no redesign."
+      "prompt": "Opening shot of the exact residential campus in the reference. The camera behaves like a premium drone, beginning high and wide and gliding slowly forward and slightly downward toward the main arrival axis. Preserve every tower, landscaped court, road, pool and amenity relationship. Golden-hour light, subtle atmospheric depth, tiny restrained human and vehicle activity, elegant real-estate campaign cinematography. End with the entrance axis visually centered so the next shot can continue the buyer journey toward the property."
+    },
+    {
+      "id": "01",
+      "name": "Boulevard Approach",
+      "asset": "approach",
+      "duration": 8,
+      "hero": true,
+      "prompt": "Continue directly from the aerial as though the prospective buyer is now approaching the property at ground level. Preserve the exact entrance architecture, tower identity, landscape and materials in the reference. Execute a slow stabilized forward glide along the driveway toward the covered arrival zone, with only subtle vehicle movement and gentle foliage motion. Keep vertical architecture stable and premium. End closer to the porte-cochere and drop-off so the next shot feels like the same arrival continuing."
     },
     {
       "id": "02",
-      "name": "Tower Hero Reveal",
-      "asset": "tower",
+      "name": "Arrival and Drop-off",
+      "asset": "arrival",
       "duration": 8,
       "hero": true,
-      "prompt": "Preserve the exact tower proportions, facade rhythm, balcony locations and base landscape from the reference. Start from a slightly distant eye-level perspective and perform a slow forward dolly with a gentle lateral arc, revealing depth in the facade while keeping vertical lines elegant and stable. Warm late-afternoon light, realistic glass reflections, premium landscape movement in a light breeze. Finish on a strong full-height architectural hero composition. No building morphing or added floors."
+      "prompt": "Treat the supplied drop-off image as the exact continuation of the same visit. Glide slowly forward behind and slightly to the side of the arriving car toward the illuminated entrance. Preserve canopy geometry, columns, water features, glazing, landscaping, vehicle scale and people already present. Human movement must be minimal and natural. Finish oriented toward the pedestrian path into the building, preparing a seamless transition to the podium and lobby threshold."
     },
     {
       "id": "03",
-      "name": "Landscape Spine",
-      "asset": "garden",
+      "name": "Podium Transition",
+      "asset": "podium",
       "duration": 8,
       "hero": false,
-      "prompt": "Preserve the exact relationship between the two residential towers, roadway and illuminated landscaped spine shown in the reference. Start from the elevated viewpoint and drift slowly downward and forward along the garden corridor, revealing paths, planting, lighting and arrival movement between the buildings. Maintain the original architecture and site geometry. Elegant blue-hour residential atmosphere, physically plausible drone motion, no new structures or altered tower facades."
+      "prompt": "Continue from the drop-off into the exact covered podium transition shown in the reference. The camera moves at a calm walking pace from the vehicle side onto the polished pedestrian path and toward the glass lobby entrance. Preserve the wood ceiling, stone columns, planters, fountains, cars, lobby glazing and people. Reflections and water should move naturally. End just outside the lobby doors with the reception visible ahead, creating a clear hand-off to the interior lobby shot."
     },
     {
       "id": "04",
-      "name": "Arrival and Podium",
-      "asset": "arrival",
-      "duration": 8,
-      "hero": false,
-      "prompt": "Use the supplied arrival architecture as the exact visual anchor. Create a premium residential arrival sequence with a slow camera glide toward the building entrance and covered podium edge. Add only subtle believable vehicle movement and restrained people for scale. Preserve facade colors, glazing, columns and massing. Clean paving, soft late-afternoon reflections and hospitality-grade arrival lighting. End oriented toward the entry, preparing for the interior lobby shot."
-    },
-    {
-      "id": "05",
-      "name": "Poolside Lifestyle",
-      "asset": "pool",
-      "duration": 8,
-      "hero": true,
-      "prompt": "Preserve the pool, facade, reception frontage, landscaping and material identity of the reference. Execute a slow cinematic lateral glide beside the water followed by a subtle push toward the warmly illuminated interior. Water reflections shimmer naturally, small practical lights glow, people move minimally and realistically. Sophisticated dusk atmosphere, luxury hospitality cinematography, no exaggerated motion or redesign."
-    },
-    {
-      "id": "06",
-      "name": "Lobby Entry",
+      "name": "Main Lobby Entry",
       "asset": "lobby",
       "duration": 8,
       "hero": true,
-      "prompt": "Enter the exact double-height lobby shown in the reference. Begin near the threshold and glide slowly forward toward the reception desk, with a very gentle upward reveal of the tall stone feature wall before settling back to human eye level. Preserve the wall materials, reception geometry, trees, warm wood and lighting. Quiet luxury, polished reflections, understated staff presence, high-end residential hospitality film."
+      "prompt": "Enter the exact luxury lobby in the reference from the threshold, continuing the prospective buyer journey. Use a slow eye-level push toward reception with a subtle rightward drift that reveals the seating area, feature wall and circulation route. Preserve stone, timber, sculpture, furniture, plants, staff and lighting exactly. Keep people understated and realistic. Finish pointing toward the private residential circulation so the next scene naturally becomes the lift lobby and corridor."
+    },
+    {
+      "id": "05",
+      "name": "Lift Lobby and Private Corridor",
+      "asset": "corridor",
+      "duration": 7,
+      "hero": false,
+      "prompt": "Use the exact lift lobby and private corridor shown in the reference. Begin near the elevators and glide forward at human walking pace down the corridor toward the apartment doors and distant window. Preserve bronze lift doors, wall panels, artwork, runner rugs, console, flowers, room numbers, lighting and corridor geometry. No people are needed. No text or numbering should change. Finish approaching the residential door zone, ready to enter the apartment in the next shot."
+    },
+    {
+      "id": "06",
+      "name": "Apartment Foyer to Living Reveal",
+      "asset": "foyerLiving",
+      "duration": 9,
+      "hero": true,
+      "prompt": "This is the first reveal inside the residence. Begin from the exact doorway and foyer viewpoint in the reference and make a slow stabilized push into the living room, as though the buyer has just entered the apartment. Preserve door, console, wall finishes, seating, coffee table, television, dining glimpse, balcony doors and skyline. Add only subtle curtain and foliage motion. Finish deeper inside the living area with the dining room visible to the right, setting up the next transition."
     },
     {
       "id": "07",
-      "name": "Private Common Area",
-      "asset": "common",
-      "duration": 7,
+      "name": "Living to Dining Transition",
+      "asset": "livingDining",
+      "duration": 8,
       "hero": false,
-      "prompt": "Preserve the common-area architecture, finishes, furniture and circulation cues in the supplied reference. Camera moves slowly through the space toward the residential circulation zone as though a visitor is being guided from the lobby to the private floors. Warm indirect light, controlled reflections and calm premium ambience. No people crossing close to camera, no geometry changes, no new rooms appearing."
+      "prompt": "Continue through the same apartment without a visual reset. Start from the living-room side of the exact reference and perform a slow lateral-forward glide toward the dining area, keeping the balcony and skyline as a continuity anchor. Preserve sofa, rug, tables, chairs, artwork, lighting, flooring and room proportions. The movement should feel like a guided walkthrough, not a commercial orbit. Finish beside the dining table with the kitchen visible beyond."
     },
     {
       "id": "08",
-      "name": "Living Room Reveal",
-      "asset": "living",
-      "duration": 9,
-      "hero": true,
-      "prompt": "Treat the supplied living room as the exact apartment identity. Begin just outside the room and make a slow doorway-to-living-room push-in, then a subtle arc that reveals the seating composition and window while preserving furniture placement, proportions, materials and ceiling. Natural daylight mixed with warm practical lighting. Premium but believable three-bedroom urban residence, architectural-film pacing, no furniture mutation."
+      "name": "Dining to Kitchen",
+      "asset": "diningKitchen",
+      "duration": 8,
+      "hero": false,
+      "prompt": "Continue from dining into the exact kitchen shown in the reference. Begin beside the dining table and glide gently forward and slightly right, revealing the kitchen island, stools, cabinetry, worktops and window while preserving the dining composition behind. Maintain the same golden-hour light and material palette as the previous apartment shots. No object or furniture mutation. Finish with the kitchen clearly established while retaining a hint of the dining space for continuity."
     },
     {
       "id": "09",
-      "name": "Dining Transition",
-      "asset": "dining",
-      "duration": 8,
-      "hero": false,
-      "prompt": "Create a graceful continuation into the dining area using the supplied image as the exact design anchor. Slowly move past the table at human eye level with a gentle side arc, preserving table, chairs, lighting feature, wall art, mirrors and room scale. Make the transition feel connected to the same neutral premium apartment established in the previous shot. Soft warm interior light, restrained reflections, no layout changes."
-    },
-    {
-      "id": "10",
-      "name": "Kitchen Walkthrough",
-      "asset": "kitchen",
-      "duration": 8,
-      "hero": false,
-      "prompt": "Use the exact kitchen in the reference as the visual anchor. Perform a slow stabilized forward glide through the galley kitchen toward the window, with a very subtle pan revealing both worktops. Preserve cabinetry, counters, appliances, window position and proportions. Bright natural daylight, immaculate but lived-in premium home atmosphere, physically plausible lens and movement, no cabinet or appliance morphing."
-    },
-    {
-      "id": "11",
-      "name": "Master Bedroom",
+      "name": "Master Bedroom Hero",
       "asset": "bedroom",
       "duration": 9,
       "hero": true,
-      "prompt": "Preserve the exact bedroom layout, bed placement, window, lighting, finishes and scale shown in the reference. Start near the doorway, gently dolly inward and arc slightly toward the window so the room opens naturally. Soft late-afternoon daylight through curtains, warm bedside lighting, subtle fabric movement. Serene luxury-residential mood, refined architectural cinematography, no person required, no furniture redesign."
+      "prompt": "Reveal the exact master bedroom in the reference as the private emotional peak of the home tour. Begin near the doorway and slowly dolly inward with a gentle arc toward the bed and balcony glazing. Preserve bed, bedside tables, artwork, walk-in wardrobe, lounge chair, plants, lighting, textiles, balcony and skyline. Subtle curtain movement only. Serene premium mood, stable architecture, no furniture or text mutation. Finish oriented toward the balcony doors so the next shot can step outside."
     },
     {
-      "id": "12",
-      "name": "Closing Return",
-      "asset": "masterplan",
+      "id": "10",
+      "name": "Balcony Lifestyle View",
+      "asset": "balcony",
       "duration": 9,
       "hero": true,
-      "prompt": "Return to the same residential development from the opening reference for a memorable cinematic finale. Begin closer to the landscaped core and slowly rise and pull backward, revealing the towers and larger development as warm evening light transitions toward blue hour. Preserve the development geometry and tower identity. Elegant practical lights begin to glow, traffic remains minimal, atmosphere premium and calm. Finish with clean visual space suitable for a title card."
+      "prompt": "Continue naturally from the bedroom onto the exact balcony shown in the reference. Make a very slow outward glide toward the glass railing and panoramic view, preserving balcony furniture, plants, candles, interior bedroom connection, skyline, water and landscape. Any person already visible should remain subtle with minimal natural motion. Let the sunset and distant city become the emotional focus. Finish holding on the horizon for a calm breath before the final exterior return."
+    },
+    {
+      "id": "11",
+      "name": "Closing Exterior Hero",
+      "asset": "aerial",
+      "duration": 9,
+      "hero": true,
+      "prompt": "Return to the exact residential campus from the opening shot, but reverse the emotional direction for the finale. Begin closer to the landscaped heart and slowly rise and pull backward, revealing the complete development as evening lights glow. Preserve all tower and site geometry. Movement must be majestic but restrained, with clean stable architecture and soft atmospheric depth. Finish high and wide with uncluttered visual space suitable for the final Ninth Atlas title and end slate added later in editing."
     }
   ]
 }
