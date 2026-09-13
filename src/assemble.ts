@@ -24,7 +24,6 @@ if (!fs.existsSync(editPath)) throw new Error(`Missing edit manifest: ${editPath
 const edit = JSON.parse(fs.readFileSync(editPath, 'utf8')) as EditManifest;
 const selectedDir = path.resolve(root, 'outputs', 'story-v2', 'selected');
 const storyDir = path.resolve(root, 'outputs', 'story-v2', 'clips');
-const legacyDir = path.resolve(root, 'outputs', 'clips');
 
 function newestMatching(dir: string, prefix: string): string | null {
   if (!fs.existsSync(dir)) return null;
@@ -39,7 +38,9 @@ function newestMatching(dir: string, prefix: string): string | null {
   return matches[0]?.absolute ?? null;
 }
 
-function resolveSceneClip(scene: EditScene): string {
+function resolveSceneClip(scene: EditScene): string | null {
+  // Explicit preferred paths are the only allowed route to legacy material.
+  // This is used for approved exceptions such as Scene 02's earlier moving-car take.
   for (const candidate of scene.preferredPaths ?? []) {
     const absolute = path.resolve(root, candidate);
     if (fs.existsSync(absolute)) return absolute;
@@ -52,13 +53,23 @@ function resolveSceneClip(scene: EditScene): string {
   const story = newestMatching(storyDir, prefix);
   if (story) return story;
 
-  const legacy = newestMatching(legacyDir, prefix);
-  if (legacy) return legacy;
-
-  throw new Error(`No MP4 found for scene ${scene.id}. Checked selected, story-v2/clips and legacy outputs/clips.`);
+  return null;
 }
 
-const resolved = edit.scenes.map((scene) => ({ scene, file: resolveSceneClip(scene) }));
+const resolvedCandidates = edit.scenes.map((scene) => ({ scene, file: resolveSceneClip(scene) }));
+const missing = resolvedCandidates.filter((item) => !item.file).map((item) => item.scene.id);
+
+if (missing.length > 0) {
+  console.error('\nASSEMBLY PREFLIGHT FAILED');
+  console.error(`Missing Story V2 MP4(s): ${missing.join(', ')}`);
+  console.error('Checked explicit preferred paths, outputs/story-v2/selected, and outputs/story-v2/clips.');
+  console.error('Generic legacy outputs/clips fallback is intentionally disabled so stale V1 footage cannot enter the final film.');
+  console.error(`Generate only the missing scenes, e.g.: ${missing.map((id) => `npm.cmd run generate:scene -- ${id}`).join(' ; ')}`);
+  console.error('');
+  process.exit(2);
+}
+
+const resolved = resolvedCandidates as Array<{ scene: EditScene; file: string }>;
 
 console.log(`\n${edit.title}`);
 console.log(`Edit manifest: ${edit.version}`);
