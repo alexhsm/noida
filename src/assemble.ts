@@ -6,7 +6,6 @@ type EditScene = {
   id: string;
   start: number;
   duration: number;
-  preferredPaths?: string[];
 };
 
 type EditManifest = {
@@ -22,7 +21,6 @@ const editPath = path.resolve(root, 'manifests', 'edit-v1.json');
 if (!fs.existsSync(editPath)) throw new Error(`Missing edit manifest: ${editPath}`);
 
 const edit = JSON.parse(fs.readFileSync(editPath, 'utf8')) as EditManifest;
-const selectedDir = path.resolve(root, 'outputs', 'story-v2', 'selected');
 const storyDir = path.resolve(root, 'outputs', 'story-v2', 'clips');
 
 function newestMatching(dir: string, prefix: string): string | null {
@@ -39,21 +37,7 @@ function newestMatching(dir: string, prefix: string): string | null {
 }
 
 function resolveSceneClip(scene: EditScene): string | null {
-  // Explicit preferred paths are the only allowed route to legacy material.
-  // This is used for approved exceptions such as Scene 02's earlier moving-car take.
-  for (const candidate of scene.preferredPaths ?? []) {
-    const absolute = path.resolve(root, candidate);
-    if (fs.existsSync(absolute)) return absolute;
-  }
-
-  const prefix = `scene-${scene.id}-`;
-  const selected = newestMatching(selectedDir, prefix);
-  if (selected) return selected;
-
-  const story = newestMatching(storyDir, prefix);
-  if (story) return story;
-
-  return null;
+  return newestMatching(storyDir, `scene-${scene.id}-`);
 }
 
 const resolvedCandidates = edit.scenes.map((scene) => ({ scene, file: resolveSceneClip(scene) }));
@@ -62,9 +46,8 @@ const missing = resolvedCandidates.filter((item) => !item.file).map((item) => it
 if (missing.length > 0) {
   console.error('\nASSEMBLY PREFLIGHT FAILED');
   console.error(`Missing Story V2 MP4(s): ${missing.join(', ')}`);
-  console.error('Checked explicit preferred paths, outputs/story-v2/selected, and outputs/story-v2/clips.');
-  console.error('Generic legacy outputs/clips fallback is intentionally disabled so stale V1 footage cannot enter the final film.');
-  console.error(`Generate only the missing scenes, e.g.: ${missing.map((id) => `npm.cmd run generate:scene -- ${id}`).join(' ; ')}`);
+  console.error(`Only this folder is allowed: ${storyDir}`);
+  console.error('No selected, legacy, or fallback output paths will be used.');
   console.error('');
   process.exit(2);
 }
@@ -73,6 +56,7 @@ const resolved = resolvedCandidates as Array<{ scene: EditScene; file: string }>
 
 console.log(`\n${edit.title}`);
 console.log(`Edit manifest: ${edit.version}`);
+console.log(`Source folder ONLY: ${storyDir}`);
 console.log(`Transition: ${edit.transitionSeconds.toFixed(2)}s crossfade\n`);
 for (const { scene, file } of resolved) {
   console.log(`✓ ${scene.id}  ${path.basename(file)}  trim=${scene.start.toFixed(2)}s + ${scene.duration.toFixed(2)}s`);
@@ -148,6 +132,7 @@ fs.writeFileSync(
     {
       assembledAt: new Date().toISOString(),
       editVersion: edit.version,
+      sourceFolder: path.relative(root, storyDir).replaceAll('\\', '/'),
       transitionSeconds: edit.transitionSeconds,
       estimatedRuntimeSeconds: cumulativeDuration,
       output: path.relative(root, outputPath).replaceAll('\\', '/'),
