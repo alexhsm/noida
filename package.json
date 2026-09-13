@@ -1,0 +1,27 @@
+{
+  "name": "ninth-atlas-residences-film",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Reproducible Runway-based cinematic residential walkthrough pipeline for Ninth Atlas.",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "validate": "tsx src/validate.ts",
+    "scene:list": "tsx src/list-scenes.ts",
+    "generate:scene": "tsx src/generate-scene.ts",
+    "generate:batch": "tsx src/generate-batch.ts",
+    "assemble": "tsx src/assemble.ts"
+  },
+  "dependencies": {
+    "@runwayml/sdk": "latest",
+    "dotenv": "latest",
+    "ffmpeg-static": "latest",
+    "sharp": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsx": "latest",
+    "typescript": "latest"
+  }
+}
