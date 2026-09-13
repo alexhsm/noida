@@ -11,7 +11,7 @@
   "assets": {
     "masterplan": "01_masterplan_aerial.jpg",
     "tower": "02_tower_hero.jpg",
-    "garden": "03_landscape_aerial.jpg",
+    "garden": "03_tower_canyon_garden.jpg",
     "arrival": "04_arrival_podium.jpg",
     "pool": "05_poolside_clubhouse.jpg",
     "lobby": "06_double_height_lobby.jpg",
@@ -42,11 +42,11 @@
     },
     {
       "id": "03",
-      "name": "Landscape Immersion",
+      "name": "Landscape Spine",
       "asset": "garden",
       "duration": 8,
       "hero": false,
-      "prompt": "Transform the reference into an immersive architectural landscape shot while preserving its garden paths, planting language, pool and surrounding built form. Camera descends gradually from an elevated view into a lower human-scale glide along the landscaped spine. Leaves and grasses move subtly, residents walk naturally in the distance, water remains calm. Refined luxury-community atmosphere, graceful stabilized movement, photorealistic materials."
+      "prompt": "Preserve the exact relationship between the two residential towers, roadway and illuminated landscaped spine shown in the reference. Start from the elevated viewpoint and drift slowly downward and forward along the garden corridor, revealing paths, planting, lighting and arrival movement between the buildings. Maintain the original architecture and site geometry. Elegant blue-hour residential atmosphere, physically plausible drone motion, no new structures or altered tower facades."
     },
     {
       "id": "04",
