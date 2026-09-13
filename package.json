@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit",
     "validate": "tsx src/validate.ts",
     "scene:list": "tsx src/list-scenes.ts",
+    "import:local": "tsx src/import-local-assets.ts",
     "generate:scene": "tsx src/generate-scene.ts",
     "generate:batch": "tsx src/generate-batch.ts",
     "assemble": "tsx src/assemble.ts"
