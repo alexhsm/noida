@@ -28,15 +28,17 @@
     "Ac12": "Living -> dining transition",
     "Ac13": "Dining -> kitchen transition",
     "Ac14": "Master bedroom hero",
-    "Ac15": "Balcony / outward lifestyle view"
+    "Ac15": "Balcony / outward lifestyle view",
+    "Ac16": "Parking / podium transition",
+    "Ac17": "Lift lobby / private corridor"
   },
   "lockedStory": [
     { "order": 0, "scene": "Aerial project establish", "candidate": "Ac1", "status": "use" },
     { "order": 1, "scene": "Approach toward hero tower", "candidate": "Ac2", "status": "candidate" },
     { "order": 2, "scene": "Arrival / drop-off", "candidate": "Ac9", "status": "use" },
-    { "order": 3, "scene": "Parking / podium transition", "candidate": null, "status": "missing-clean-master" },
+    { "order": 3, "scene": "Parking / podium transition", "candidate": "Ac16", "status": "use" },
     { "order": 4, "scene": "Main lobby entry", "candidate": "Ac3", "status": "use-after-clean-master" },
-    { "order": 5, "scene": "Lift lobby / private corridor", "candidate": null, "status": "missing-clean-master" },
+    { "order": 5, "scene": "Lift lobby / private corridor", "candidate": "Ac17", "status": "use" },
     { "order": 6, "scene": "Apartment foyer / living-room reveal", "candidate": "Ac11", "status": "use" },
     { "order": 7, "scene": "Living -> dining", "candidate": "Ac12", "status": "use-after-clean-master" },
     { "order": 8, "scene": "Dining -> kitchen", "candidate": "Ac13", "status": "use" },
@@ -45,8 +47,8 @@
     { "order": 11, "scene": "Closing exterior hero", "candidate": "Ac1", "status": "reuse-with-different-motion" }
   ],
   "notes": [
-    "Ac1, Ac11 and Ac13 are already suitable clean video-master candidates.",
+    "Ac1, Ac11, Ac13, Ac16 and Ac17 are clean video-master candidates.",
     "Several other AC frames include brochure typography/overlays; create clean cinematic versions before Runway generation to avoid text warping.",
-    "Parking/podium and lift/private-corridor master frames remain missing and must be created from the concept architecture pack before final batch generation."
+    "The previously missing parking/podium and lift/private-corridor scenes are now covered by Ac16 and Ac17."
   ]
 }
