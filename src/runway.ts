@@ -25,11 +25,11 @@ export async function uploadLocalAsset(client: RunwayML, filePath: string): Prom
   const bytes = await fs.readFile(filePath);
   const filename = path.basename(filePath);
 
-  // Use Runway's documented toFile(Buffer, filename) route rather than a
-  // ReadStream. This is deterministic on modern Node/Windows and avoids the
-  // stream-normalisation error seen with Node 24 on this workstation.
+  // Runway's current SDK expects createEphemeral({ file: Uploadable }).
+  // Convert the Buffer explicitly to an Uploadable File first. This avoids
+  // Windows/Node stream-normalisation issues and keeps the SDK call typed.
   const uploadFile = await toFile(bytes, filename);
-  const { uri } = await client.uploads.createEphemeral(uploadFile);
+  const { uri } = await client.uploads.createEphemeral({ file: uploadFile });
   return uri;
 }
 
