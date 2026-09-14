@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import ffmpegStatic from 'ffmpeg-static';
 
 type EditScene = {
   id: string;
@@ -62,11 +63,26 @@ for (const { scene, file } of resolved) {
   console.log(`✓ ${scene.id}  ${path.basename(file)}  trim=${scene.start.toFixed(2)}s + ${scene.duration.toFixed(2)}s`);
 }
 
-const ffmpeg = process.env.FFMPEG_PATH || 'ffmpeg';
-const probe = spawnSync(ffmpeg, ['-version'], { encoding: 'utf8' });
-if (probe.status !== 0) {
-  throw new Error(`FFmpeg is not available as '${ffmpeg}'. Set FFMPEG_PATH or add ffmpeg to PATH.`);
+const ffmpegCandidates = [process.env.FFMPEG_PATH, ffmpegStatic, 'ffmpeg'].filter(
+  (value): value is string => Boolean(value),
+);
+
+let ffmpeg: string | null = null;
+for (const candidate of ffmpegCandidates) {
+  const probe = spawnSync(candidate, ['-version'], { encoding: 'utf8' });
+  if (probe.status === 0) {
+    ffmpeg = candidate;
+    break;
+  }
 }
+
+if (!ffmpeg) {
+  throw new Error(
+    'FFmpeg could not be resolved. Tried FFMPEG_PATH, bundled ffmpeg-static, and system PATH.',
+  );
+}
+
+console.log(`FFmpeg: ${ffmpeg}`);
 
 const args: string[] = ['-hide_banner', '-y'];
 for (const item of resolved) {
